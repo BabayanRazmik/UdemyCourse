@@ -23,6 +23,8 @@ namespace UdemyCourse.Controllers
             return View(objList);
         }
 
+        #region Create
+
         [HttpGet]
         public IActionResult Create()
         {
@@ -32,9 +34,86 @@ namespace UdemyCourse.Controllers
         [HttpPost]
         public IActionResult Create(ApplicationType model)
         {
-            _db.ApplicationType.Add(model);
-            _db.SaveChanges();
-            return View();
+            if (ModelState.IsValid)
+            {
+                _db.ApplicationType.Add(model);
+                _db.SaveChanges();
+                return RedirectToAction("Index", "ApplicationType");
+            }
+            return View(model);
         }
+
+        #endregion
+
+        #region Edit
+
+        [HttpGet]
+        public IActionResult Edit(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+
+            var obj = _db.ApplicationType.Find(id);
+
+            if (obj == null)
+            {
+                return NotFound();
+            }
+
+            return View(obj);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(ApplicationType app)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.ApplicationType.Update(app);
+                _db.SaveChanges();
+                return RedirectToAction("Index", "ApplicationType");
+            }
+            return View(app);
+        }
+
+        #endregion
+
+        #region Delete
+
+        [HttpGet]
+        public IActionResult Delete(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+
+            var obj = _db.ApplicationType.Find(id);
+
+            if (obj == null)
+            {
+                return NotFound();
+            }
+
+            return View(obj);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeletePost(int? id)
+        {
+            var obj = _db.ApplicationType.Find(id);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+            _db.ApplicationType.Remove(obj);
+            _db.SaveChanges();
+            return RedirectToAction("Index", "ApplicationType");
+        }
+
+        #endregion
     }
 }
