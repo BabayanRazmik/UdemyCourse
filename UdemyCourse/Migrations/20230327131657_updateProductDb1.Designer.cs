@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UdemyCourse.Data;
 
 namespace UdemyCourse.Migrations
 {
     [DbContext(typeof(ApplicationDbConntext))]
-    partial class ApplicationDbConntextModelSnapshot : ModelSnapshot
+    [Migration("20230327131657_updateProductDb1")]
+    partial class updateProductDb1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -81,3 +81,9 @@ body {
 .w-50 {
     width:30%;
 }
+
+.img {
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #bbb;
+}

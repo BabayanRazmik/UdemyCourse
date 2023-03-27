@@ -6,6 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\ViewModel\**" />
+    <Content Remove="Models\ViewModel\**" />
+    <EmbeddedResource Remove="Models\ViewModel\**" />
+    <None Remove="Models\ViewModel\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Controllers\ApplicationType.cs~RF8e317a61.TMP" />
     <None Remove="Data\ApplicationDbConntext.cs~RF8e363ac0.TMP" />
     <None Remove="Models\ApplicationType.cs~RF8e329d27.TMP" />
@@ -19,6 +26,10 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\images\product\" />
   </ItemGroup>
 
 </Project>
