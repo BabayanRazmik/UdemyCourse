@@ -164,7 +164,11 @@ namespace UdemyCourse.Controllers
             {
                 return NotFound();
             }
-            Product product = _db.Product.Include(p => p.Category).FirstOrDefault(c => c.Id == id);
+
+            Product product = _db.Product
+                .Include(p => p.Category)
+                .Include(p => p.ApplicationType)
+                .FirstOrDefault(c => c.Id == id);
 
             if (product == null)
             {
