@@ -29,6 +29,12 @@ namespace UdemyCourse
             options.UseSqlServer(
                 Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddHttpContextAccessor();
+            services.AddSession(Options => { 
+                Options.IdleTimeout = TimeSpan.FromSeconds(10);
+                Options.Cookie.HttpOnly = true;
+                Options.Cookie.IsEssential = true;
+            });
             services.AddControllersWithViews();
         }
 
@@ -51,6 +57,8 @@ namespace UdemyCourse
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {
