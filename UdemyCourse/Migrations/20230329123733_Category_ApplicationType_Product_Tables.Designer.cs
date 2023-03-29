@@ -9,8 +9,8 @@ using UdemyCourse.Data;
 namespace UdemyCourse.Migrations
 {
     [DbContext(typeof(ApplicationDbConntext))]
-    [Migration("20230325113954_addProductDb")]
-    partial class addProductDb
+    [Migration("20230329123733_Category_ApplicationType_Product_Tables")]
+    partial class Category_ApplicationType_Product_Tables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -62,6 +62,9 @@ namespace UdemyCourse.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("ApplicationTypeId")
+                        .HasColumnType("int");
+
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
@@ -78,7 +81,12 @@ namespace UdemyCourse.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
+                    b.Property<string>("ShortDesc")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ApplicationTypeId");
 
                     b.HasIndex("CategoryId");
 
@@ -87,11 +95,19 @@ namespace UdemyCourse.Migrations
 
             modelBuilder.Entity("UdemyCourse.Models.Product", b =>
                 {
+                    b.HasOne("UdemyCourse.Models.ApplicationType", "ApplicationType")
+                        .WithMany()
+                        .HasForeignKey("ApplicationTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("UdemyCourse.Models.Category", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("ApplicationType");
 
                     b.Navigation("Category");
                 });
