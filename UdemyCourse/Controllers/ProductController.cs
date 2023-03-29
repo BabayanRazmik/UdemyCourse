@@ -25,7 +25,9 @@ namespace UdemyCourse.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<Product> objList = _db.Product.Include(p => p.Category);       
+            IEnumerable<Product> objList = _db.Product
+                .Include(p => p.Category)
+                .Include(p => p.ApplicationType);       
 
             return View(objList);
         }
